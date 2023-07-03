@@ -22,10 +22,6 @@ namespace Monitor
     {
         public MainWindow()
         {
-            ProtocolHandler pr = new ProtocolHandler();
-            pr.Launch();
-            pr.Open(0, 0);
-            pr.Close(0);
             InitializeComponent();
         }
     }

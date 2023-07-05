@@ -5,18 +5,19 @@ namespace Monitor
 {
     public partial class ProtocolHandler
     {
-        public void Launch()
+        public void Initialize()
         {
-            ChannelInitialize();
+            CanInitialize();
         }
         public void Open(byte channel, byte flags)
         {
-            ChannelOpen(channel, flags);
+            CanOpen(channel, flags);
         }
         public void Close(byte channel)
         {
-            ChannelClose(channel);
+            CanClose(channel);
         }
+        
     }
 }
 

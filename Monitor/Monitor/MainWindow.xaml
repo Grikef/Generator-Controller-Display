@@ -4,9 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Monitor"
-        mc:Ignorable="d"
-        Title="Monitor" Height="600" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Monitor" Height="720" Width="1300">
 
+    <Window.Resources>
+        <Style x:Key="Light">
+            <Setter Property="Control.FontFamily" Value="Veranda"/>
+            <Setter Property="Control.FontSize" Value="16"/>
+            <Setter Property="Control.FontFamily" Value="Veranda"/>
+            <Setter Property="Control.Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -19,16 +28,34 @@
 
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="170"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <ListBox Grid.Column="0">
-                <ListBoxItem Content="Example1" Background="Aqua"/>
-                <ListBoxItem Content="Example2" Background="Aqua"/>
-            </ListBox>
+            <TreeView Grid.Column="0" Style="{StaticResource Light}">
+                <TreeViewItem Header="Общие" IsSelected="True" Selected="TreeViewMain_Selected"/>
+                <TreeViewItem Header="Входы/Выходы" Selected="TreeViewInOut_Selected">
+                    <TreeViewItem Header="Входы" Selected="TreeViewIn_Selected"/>
+                    <TreeViewItem Header="Выходы" Selected="TreeViewOut_Selected"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Дополнительные"/>
+            </TreeView>
 
-            <Frame Grid.Column="1" x:Name="InfoFrame"/>
+            <StackPanel Grid.Column="1" Height="auto" Width="auto">
+                <DockPanel Height="100" LastChildFill="True">
+                    <Border DockPanel.Dock="Left" BorderThickness="1" BorderBrush="Black">
+                        <Label Content="Аварии" Style="{StaticResource Light}" VerticalAlignment="Center">
+                            <Label.LayoutTransform>
+                                <RotateTransform Angle="90"/>
+                            </Label.LayoutTransform>
+                        </Label>
+                    </Border>
+                    
+                    <TextBox x:Name="ErrorBox" IsReadOnly="True" Padding="5" Background="LightGray" Foreground="Red" Height="100" Width="auto" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraBold" Text="- ТУТ ДОЛЖНА БЫТЬ ОЧЕНЬ ДЛИННАЯ ОШИБКА" AcceptsReturn="True" FontStretch="SemiExpanded" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Verdana"/>
+                </DockPanel>
+                
+                <Frame x:Name="InfoFrame" NavigationUIVisibility="Hidden" Height="540" Width="1095"/>
+            </StackPanel>
 
         </Grid>
     </Grid>

@@ -1,0 +1,25 @@
+﻿<Page x:Class="Monitor.pages.Parameters"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Monitor.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="560" d:DesignWidth="1110"
+      Title="Parameters" Background="White">
+
+    <Grid Name="grid" Width="1110" Height="560">
+        <Button Click="Button_Click" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="905" Canvas.Top="384" Margin="923,53,0,0"/>
+        <!--<Rectangle x:Uid="r1" Name="r1" Height="0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Fill="Red" Canvas.Left="800" Canvas.Top="300"/>
+        <Rectangle   Margin="800,0,0,173" Height="300" Width="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Stroke="Black"/>
+        <Label Margin="800,0,0,490" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="l" Content="" Height="36" Width="58"/>-->
+
+        <!-- Стрелка спидометра -->
+        <Rectangle x:Name="needle" Width="4" Height="150" Fill="Red" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,1" Canvas.Left="529" Canvas.Top="293" Margin="907,0,199,182">
+            <Rectangle.RenderTransform>
+                <RotateTransform x:Name="needleTransform" CenterX="0" CenterY="0" Angle="0"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+    </Grid>
+</Page>

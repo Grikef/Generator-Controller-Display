@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Monitor.pages;
 
 namespace Monitor
 {
@@ -23,6 +24,8 @@ namespace Monitor
         public MainWindow()
         {
             InitializeComponent();
+
+            InfoFrame.Content = new Parameters();
         }
 
         public void TreeViewMain_Selected(object sender, RoutedEventArgs e)

@@ -5,58 +5,81 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Monitor.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="260" d:DesignWidth="1095"
+      d:DesignHeight="540" d:DesignWidth="500"
       Title="Output" Background="White">
 
     <Page.Resources>
-        <Style x:Key="Light">
+        <Style x:Key="ColumnName">
             <Setter Property="Control.FontFamily" Value="Verdana"/>
             <Setter Property="Control.FontWeight" Value="Bold" />
-            <Setter Property="Control.FontSize" Value="11" />
+            <Setter Property="Control.FontSize" Value="14" />
             <Setter Property="Control.VerticalAlignment" Value="Center" />
             <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
             <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
             <Setter Property="Control.Margin" Value="5,0,5,0" />
             <Setter Property="Control.Background" Value="LightGreen" />
         </Style>
+
+        <Style x:Key="ColumnValue">
+            <Setter Property="Control.FontFamily" Value="Verdana"/>
+            <Setter Property="Control.FontWeight" Value="ExtraBlack" />
+            <Setter Property="Control.FontSize" Value="14" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+            <Setter Property="Control.HorizontalAlignment" Value="Center" />
+            <Setter Property="Control.Margin" Value="5,0,5,0" />
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+        </Style>
     </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1">
         <Grid Margin="10" ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="105"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Значение" Style="{StaticResource Light}" />
-            <Label Grid.Row="3" Grid.Column="0" Content="Значение" Style="{StaticResource Light}" />
+            <Label Grid.Row="0" Grid.Column="0" Content="№ выхода" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Имя функции" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Статус" Style="{StaticResource ColumnName}"/>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="2" Content="Напряжение" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="3" Content="Мощность" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="4" Content="Обороты" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="5" Content="Ещё напряжение" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="6" Content="Больше напряжения" Style="{StaticResource Light}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="1" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="2" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="3" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="4" Style="{StaticResource ColumnValue}"/>
 
-            <Label Grid.Row="2" Grid.Column="1" Content="Больше напряжения" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="2" Content="Больше напряжения" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="3" Content="Больше напряжения" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="4" Content="Больше напряжения" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="5" Content="Больше напряжения" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="6" Content="Больше напряжения" Style="{StaticResource Light}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Стартер" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Топливо" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="Предварительный подогрев" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="Функция" Style="{StaticResource ColumnValue}"/>
 
+            <TextBlock Grid.Row="1" Grid.Column="2" x:Name="FirstValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="SecondValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" x:Name="ThirdValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FourthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+
+            <Button Grid.Row="1" Grid.Column="3" x:Uid="1" Click="Button_Click" Height="30" Width="30" Background="Red">
+                <TextBlock x:Name="la" Text="OFF"/>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="3" x:Uid="2" Click="Button_Click" Height="30" Width="30" Background="Red">
+                <TextBlock Text="OFF"/>
+            </Button>
+            <Button Grid.Row="3" Grid.Column="3" x:Uid="3" Click="Button_Click" Height="30" Width="30" Background="Red">
+                <TextBlock Text="OFF"/>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="3" x:Uid="4" Click="Button_Click" Height="30" Width="30" Background="Red">
+                <TextBlock Text="OFF"/>
+            </Button>
         </Grid>
     </Border>
 </Page>

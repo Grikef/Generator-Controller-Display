@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Monitor.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="260" d:DesignWidth="1095"
+      d:DesignHeight="540" d:DesignWidth="500"
       Title="Input" Background="White">
 
     <Page.Resources>
-        <Style x:Key="Light">
+        <Style x:Key="ColumnName">
             <Setter Property="Control.FontFamily" Value="Verdana"/>
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Setter Property="Control.FontSize" Value="14" />
@@ -19,14 +19,21 @@
             <Setter Property="Control.Margin" Value="5,0,5,0" />
             <Setter Property="Control.Background" Value="LightGreen" />
         </Style>
+
+        <Style x:Key="ColumnValue">
+            <Setter Property="Control.FontFamily" Value="Verdana"/>
+            <Setter Property="Control.FontWeight" Value="ExtraBlack" />
+            <Setter Property="Control.FontSize" Value="14" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+            <Setter Property="Control.HorizontalAlignment" Value="Center" />
+            <Setter Property="Control.Margin" Value="5,0,5,0" />
+        </Style>
     </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1">
-        <Grid Margin="10" ShowGridLines="True">
+        <Grid x:Name="InputTable" Margin="10" ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -34,22 +41,45 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Значение" Style="{StaticResource Light}" />
-            <Label Grid.Row="3" Grid.Column="0" Content="Значение" Style="{StaticResource Light}" />
+            <Label Grid.Row="0" Grid.Column="0" Content="№ входа" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Имя функции" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Статус" Style="{StaticResource ColumnName}"/>
+            
+            <Label Grid.Row="1" Grid.Column="0" Content="1" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="2" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="3" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="4" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="5" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="6" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="7" Grid.Column="0" Content="7" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="8" Grid.Column="0" Content="8" Style="{StaticResource ColumnValue}"/>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="2" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="3" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="0" Grid.Column="4" Content="Температура" Style="{StaticResource Light}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="8" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
 
-            <Label Grid.Row="2" Grid.Column="1" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="2" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="3" Content="Температура" Style="{StaticResource Light}"/>
-            <Label Grid.Row="2" Grid.Column="4" Content="Температура" Style="{StaticResource Light}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" x:Name="FirstValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="SecondValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" x:Name="ThirdValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FourthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="5" Grid.Column="2" x:Name="FifthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" x:Name="SixthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="7" Grid.Column="2" x:Name="SeventhValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="8" Grid.Column="2" x:Name="EighthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
 
         </Grid>
     </Border>

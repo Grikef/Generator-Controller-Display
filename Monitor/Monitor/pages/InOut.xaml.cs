@@ -28,19 +28,19 @@ namespace Monitor.pages
             OutFrame.Content = new pages.Output();
         }
 
-        public void RefreshAll()
-        {
-            pages.Input? InPage = InFrame.Content as pages.Input;
-            if( InPage != null )
-            {
-                InPage.RefreshAll();
-            }
+        //public void RefreshAll()
+        //{
+        //    pages.Input? InPage = InFrame.Content as pages.Input;
+        //    if( InPage != null )
+        //    {
+        //        InPage.RefreshAll();
+        //    }
 
-            pages.Output? OutPage = InFrame.Content as pages.Output;
-            if ( OutPage != null )
-            {
-                OutPage.RefreshAll();
-            }
-        }
+        //    pages.Output? OutPage = InFrame.Content as pages.Output;
+        //    if ( OutPage != null )
+        //    {
+        //        OutPage.RefreshAll();
+        //    }
+        //}
     }
 }

@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Monitor.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="560" d:DesignWidth="1095"
+      d:DesignHeight="540" d:DesignWidth="1095"
       Title="InOut" Background="White">
 
     <Grid>
         <DockPanel LastChildFill="False">
-            <Frame DockPanel.Dock="Top" x:Name="InFrame" Height="260"/>
-            <Frame DockPanel.Dock="Bottom" x:Name="OutFrame" Height="260"/>
+            <Frame DockPanel.Dock="Left" x:Name="InFrame" Width="500"/>
+            <Frame DockPanel.Dock="Right" x:Name="OutFrame" Width="500"/>
         </DockPanel>
     </Grid>
 </Page>         

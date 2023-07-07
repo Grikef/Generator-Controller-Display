@@ -9,9 +9,8 @@
 
     <Window.Resources>
         <Style x:Key="Light">
-            <Setter Property="Control.FontFamily" Value="Veranda"/>
-            <Setter Property="Control.FontSize" Value="16"/>
-            <Setter Property="Control.FontFamily" Value="Veranda"/>
+            <Setter Property="Control.FontFamily" Value="Verdana"/>
+            <Setter Property="Control.FontSize" Value="15"/>
             <Setter Property="Control.Padding" Value="5"/>
         </Style>
     </Window.Resources>
@@ -23,7 +22,22 @@
         </Grid.RowDefinitions>
         
         <Menu Height="20" VerticalAlignment="Top">
-            <MenuItem Header="Item1"/>
+            <MenuItem Header="Программа">
+                <MenuItem Header="О программе" Click="AboutProgram_Click"/>
+                <MenuItem Header="Выйти" Click="Exit_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Конфигурация">
+                <MenuItem Header="Генератор"/>
+                <MenuItem Header="Цифровые">
+                    <!--<MenuItem Header="Цифровые входы"/>
+                    <MenuItem Header="Цифровые выходы"/>-->
+                </MenuItem>
+                <MenuItem Header="Аналоговые">
+                    <!--<MenuItem Header="Аналоговые входы"/>
+                    <MenuItem Header="Аналоговые выходы"/>-->
+                </MenuItem>
+            </MenuItem>
         </Menu>
 
         <Grid Grid.Row="1" Margin="10">
@@ -33,10 +47,14 @@
             </Grid.ColumnDefinitions>
 
             <TreeView Grid.Column="0" Style="{StaticResource Light}">
-                <TreeViewItem Header="Общие" IsSelected="True" Selected="TreeViewMain_Selected"/>
-                <TreeViewItem Header="Входы/Выходы" Selected="TreeViewInOut_Selected">
+                <TreeViewItem x:Name="defaultTVItem" Header="Генератор" Selected="TreeViewMain_Selected"/>
+                <TreeViewItem Header="Цифровые" Selected="TreeViewInOut_Selected">
                     <TreeViewItem Header="Входы" Selected="TreeViewIn_Selected"/>
                     <TreeViewItem Header="Выходы" Selected="TreeViewOut_Selected"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Аналоговые">
+                    <TreeViewItem Header="Входы"/>
+                    <TreeViewItem Header="Выходы"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Дополнительные"/>
             </TreeView>
@@ -51,7 +69,7 @@
                         </Label>
                     </Border>
                     
-                    <TextBox x:Name="ErrorBox" IsReadOnly="True" Padding="5" Background="LightGray" Foreground="Red" Height="100" Width="auto" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraBold" Text="- ТУТ ДОЛЖНА БЫТЬ ОЧЕНЬ ДЛИННАЯ ОШИБКА" AcceptsReturn="True" FontStretch="SemiExpanded" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Verdana"/>
+                    <TextBox x:Name="ErrorBox" IsReadOnly="True" Padding="5" Background="LightGray" Foreground="Red" Height="100" Width="auto" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraBold" AcceptsReturn="True" FontStretch="SemiExpanded" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Verdana"/>
                 </DockPanel>
                 
                 <Frame x:Name="InfoFrame" NavigationUIVisibility="Hidden" Height="540" Width="1095"/>

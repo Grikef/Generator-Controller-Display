@@ -21,19 +21,37 @@ namespace Monitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        Dictionary<int, string> errors = new Dictionary<int, string>();
         public MainWindow()
         {
             InitializeComponent();
 
             InfoFrame.Content = new Parameters();
+            defaultTVItem.IsSelected = true;
+
+            errors.Add(000, "12:46:35 -Пример ошибки, пришедшей от устройства");
+            errors.Add(001, "14:02:54 -Другой пример ошибки, пришедшей от устройства");
+
+            foreach (var item in errors.Values.Reverse())
+                ErrorBox.Text += item + '\n';
+        }
+
+        public void AboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this, "Тут должно быть описание программы", "О программе");
+        }
+
+        public void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         public void TreeViewMain_Selected(object sender, RoutedEventArgs e)
         {
-            //if (InfoFrame.Content is not null)
-            //{
-            //    InfoFrame.Content = null;
-            //}
+            if (InfoFrame.Content is not pages.Parameters)
+            {
+                InfoFrame.Content = new pages.Parameters();
+            }
         }
 
         public void TreeViewInOut_Selected(object sender, RoutedEventArgs e)
@@ -61,6 +79,33 @@ namespace Monitor
                 InfoFrame.Content = new pages.Output();
                 e.Handled = true;
             }
+        }
+
+        public void AddError(int id, string error)
+        {
+            if (!errors.ContainsKey(id))
+            {
+                errors.Add(id, '\n' + error);
+            }
+            else
+            {
+                errors.Remove(id);
+                errors.Add(id, error);
+            }
+
+            foreach(var item in errors.Values.Reverse())
+                ErrorBox.Text += item + '\n';
+        }
+
+        public void ClearErrors()
+        {
+            errors.Clear();
+            ErrorBox.Text = "";
+        }
+
+        private void InfoFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
         }
     }
 }

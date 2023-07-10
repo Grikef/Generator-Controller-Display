@@ -54,48 +54,48 @@ public partial class ProtocolHandler
     //#8
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiWrite")]
-    private static extern unsafe short CanWrite(byte channel, canMessage* buffer, canMessage count);
+    private static extern short CanWrite(byte channel, canMessage buffer, short count);
     
     //#9
     
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiTransmit")]
-    private static extern unsafe short CanTransmit(byte channel, canMessage* buffer);
+    private static extern short CanTransmit(byte channel, canMessage buffer);
     
     //#10
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiTrCancel")]
-    private static extern unsafe short CanTransmitCancel(byte channel, UInt16* count);
+    private static extern short CanTransmitCancel(byte channel, UInt16 count); // count must be containing in RAM
     
     //#11
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiTrStat")]
-    private static extern unsafe short CanTransmitStatistic(byte channel, UInt16* count);
+    private static extern short CanTransmitStatistic(byte channel, UInt16 count); // count must be containing in RAM
     
     //#12
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiRead")]
-    private static extern unsafe short CanRead(byte channel, canMessage* buffer, UInt16 count);
+    private static extern short CanRead(byte channel, canMessage buffer, short count);
     
     //#13
     
     [DllImport("chai.dll", CharSet = CharSet.Unicode, EntryPoint = "CiErrsGetClear")]
-    private static extern unsafe short CanErrorsGetClear(byte channel, canErrors* errors);
+    private static extern short CanErrorsGetClear(byte channel, canErrors errors);
     
     //#14
     
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint = "CiWaitEvent")]
-    private static extern unsafe short CanWaitEvent(CanWait* canWait, int cwCount, int timeOut);
+    private static extern short CanWaitEvent(CanWait canWait, int cwCount, int timeOut);
     
     //#15
 
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiTrQueThreshold")]
-    private static extern unsafe short CanTransmitQueueThreshold(byte channel, UInt16 getset, UInt16* threshold);
+    private static extern short CanTransmitQueueThreshold(byte channel, UInt16 getset, UInt16 threshold); // threshold must be containing in RAM
     
     //#16
     
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiRcQueThreshold")]
-    private static extern unsafe short CanChangeQueueThreshold(byte channel, UInt16 getset, UInt16* threshold);
+    private static extern short CanChangeQueueThreshold(byte channel, UInt16 getset, UInt16 threshold); // threshold must be containing in RAM
     
     //#17
     
@@ -146,12 +146,12 @@ public partial class ProtocolHandler
     
     //#26
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiChipStat")]
-    private static extern unsafe short CanChipStatus(byte channel, ChipStatus* chipStatistics);
+    private static extern short CanChipStatus(byte channel, ChipStatus chipStatistics);
 
     
     //#27
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiChipStatToStr")]
-    private static extern unsafe short CanChipStatusToString(ChipStatus* status, ChipStatusDescription* description);
+    private static extern short CanChipStatusToString(ChipStatus status, ChipStatusDescription description);
 
     
     //#28
@@ -162,12 +162,12 @@ public partial class ProtocolHandler
     //#29
 
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiStrError")]
-    private static extern unsafe void CanStringError(short canErrorNumber,char* buffer, short bufferLength);
+    private static extern void CanStringError(short canErrorNumber,char buffer, short bufferLength); //buffer must be containing in memory
 
     
     //#30
     [DllImport("chai.dll",CharSet = CharSet.Unicode, EntryPoint =  "CiPerror")]
-    private static extern unsafe void CanPrintError(short CanErrorNumber, char* message);
+    private static extern void CanPrintError(short CanErrorNumber, char message); // message must be containing in memory
     
     //#31
     //declared, but cannot be used(not sure; try it)

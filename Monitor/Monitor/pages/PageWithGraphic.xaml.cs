@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,39 +25,229 @@ namespace Monitor.pages
     {
         private DispatcherTimer timer;
 
-        private List<Point> points = new List<Point>();
+        private List<double> points = new List<double>();
         private Rectangle scale = new Rectangle();
         private Label valueOfParameter = new Label();
 
-        private int graphicWidth;
-        private int graphicHeight;
-        private int graphicToScale = 10;
+        private double graphicWidth;
+        private double graphicHeight;
+        private int graphicToScale = 30;
         private int scaleWidth = 20;
-        private int betweenPoints;
-        private int countOfPoints = 50;
+        private double betweenPoints;
+        private int countOfPoints = 25;
 
-        private int maxValue;
+        private double topMargin = 20;
+        private double bottomMargin = 20;
+        
 
+        private double maxAllowableValue;
+        private double minAllowableValue;
+        private double normValue;
+        private bool f;
+        private double devb;
+        private double devt;
 
+        //public PageWithGraphic(string graphicNameString, double min, double max, double norm)
+        //{
+        //    InitializeComponent();
 
-        public PageWithGraphic()
+        //    maxAllowableValue = max;
+        //    minAllowableValue = min;
+        //    normValue = norm;
+
+        //    graphicHeight = grid.Height - bottomMargin - topMargin;
+        //    graphicWidth = grid.Width - graphicToScale - scaleWidth;
+        //    betweenPoints = graphicWidth / countOfPoints;
+
+        //    Line xNorm = new Line();
+        //    xNorm.Stroke = Brushes.DarkGreen;
+        //    xNorm.StrokeThickness = 1;
+        //    xNorm.StrokeDashArray = new DoubleCollection() {2, 2};
+        //    xNorm.X1 = 0;
+        //    xNorm.Y1 = graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue);
+        //    xNorm.X2 = grid.Width;
+        //    xNorm.Y2 = graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue);
+        //    xNorm.VerticalAlignment = VerticalAlignment.Top;
+        //    xNorm.Margin = new Thickness(0, topMargin, 0, 0);
+        //    grid.Children.Add(xNorm);
+
+        //    Label normLabel = new Label();
+        //    normLabel.HorizontalAlignment = HorizontalAlignment.Right;
+        //    normLabel.VerticalAlignment = VerticalAlignment.Top;
+        //    normLabel.Margin = new Thickness(0, graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue), scaleWidth, 0);
+        //    normLabel.Content = norm.ToString();
+        //    normLabel.FontSize = 12;
+        //    grid.Children.Add(normLabel);
+
+        //    CreateGraphicAndScale(graphicNameString);
+
+        //    PlotGraph();
+
+        //    timer = new DispatcherTimer();
+        //    timer.Interval = TimeSpan.FromSeconds(2); // время обновления
+        //    timer.Tick += Timer_Tick;
+        //    timer.Start();
+        //}
+
+        //график выше и ниже нормы
+        //0 - не выше, 1 - не ниже
+        public PageWithGraphic(string graphicNameString, double min, double max, double norm, bool f)
         {
             InitializeComponent();
 
-            graphicHeight = (int)grid.Height-20;
-            graphicWidth = (int)grid.Width - graphicToScale - scaleWidth;
+            maxAllowableValue = max;
+            minAllowableValue = min;
+            normValue = norm;
+            this.f = f;
+
+            graphicHeight = grid.Height - bottomMargin - topMargin;
+            graphicWidth = grid.Width - graphicToScale - scaleWidth;
             betweenPoints = graphicWidth / countOfPoints;
 
-            //создание шкалы и значение параметра
+            CreateGraphicAndScale(graphicNameString);
+
+            Line xNorm = new Line();
+            xNorm.Stroke = Brushes.DarkGreen;
+            xNorm.StrokeThickness = 1;
+            xNorm.StrokeDashArray = new DoubleCollection() {2, 2};
+            xNorm.X1 = 0;
+            xNorm.Y1 = graphicHeight - ValueToY(norm);
+            xNorm.X2 = grid.Width;
+            xNorm.Y2 = graphicHeight - ValueToY(norm);
+            xNorm.VerticalAlignment = VerticalAlignment.Top;
+            xNorm.Margin = new Thickness(0, topMargin, 0, 0);
+            grid.Children.Add(xNorm);
+
+            Label normLabel = new Label();
+            normLabel.HorizontalAlignment = HorizontalAlignment.Right;
+            normLabel.VerticalAlignment = VerticalAlignment.Top;
+            normLabel.Margin = new Thickness(0, graphicHeight - ValueToY(norm), scaleWidth, 0);
+            normLabel.Content = norm.ToString();
+            normLabel.FontSize = 12;
+            grid.Children.Add(normLabel);
+
+            
+
+            PlotGraph();
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2); // время обновления
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void ColorForScaleForSimpleGraphic(double value)
+        {
+            if (f)
+            {
+                if(value >= normValue)
+                    scale.Fill = Brushes.LightGreen;
+                else
+                    scale.Fill = Brushes.Coral;
+            }
+            else
+            {
+                if (value <= normValue)
+                    scale.Fill = Brushes.LightGreen;
+                else
+                    scale.Fill = Brushes.Coral;
+            }
+        }
+
+        //график с отклонением
+
+        public PageWithGraphic(string graphicNameString, double min, double max, double norm, double devb, double devt)
+        {
+            InitializeComponent();
+
+            maxAllowableValue = max;
+            minAllowableValue = min;
+            normValue = norm;
+
+            this.devb = devb;
+            this.devt = devt;
+
+
+            graphicHeight = grid.Height - bottomMargin - topMargin;
+            graphicWidth = grid.Width - graphicToScale - scaleWidth;
+            betweenPoints = graphicWidth / countOfPoints;
+
+            CreateGraphicAndScale(graphicNameString);
+
+            Line xNorm = new Line();
+            xNorm.Stroke = Brushes.DarkGreen;
+            xNorm.StrokeThickness = 1;
+            xNorm.StrokeDashArray = new DoubleCollection() {2, 2};
+            xNorm.X1 = 0;
+            xNorm.Y1 = graphicHeight - ValueToY(norm + devt);
+            xNorm.X2 = grid.Width;
+            xNorm.Y2 = graphicHeight - ValueToY(norm + devt);
+            xNorm.VerticalAlignment = VerticalAlignment.Top;
+            xNorm.Margin = new Thickness(0, topMargin, 0, 0);
+            grid.Children.Add(xNorm);
+
+            Label normLabel = new Label();
+            normLabel.HorizontalAlignment = HorizontalAlignment.Right;
+            normLabel.VerticalAlignment = VerticalAlignment.Top;
+            normLabel.Margin = new Thickness(0, graphicHeight - ValueToY(norm + devt), scaleWidth, 0);
+            normLabel.Content = (norm + devt).ToString();
+            normLabel.FontSize = 12;
+            grid.Children.Add(normLabel);
+
+            Line xNorm2 = new Line();
+            xNorm2.Stroke = Brushes.DarkGreen;
+            xNorm2.StrokeThickness = 1;
+            xNorm2.StrokeDashArray = new DoubleCollection() { 2, 2 };
+            xNorm2.X1 = 0;
+            xNorm2.Y1 = graphicHeight - ValueToY(norm - devb);
+            xNorm2.X2 = grid.Width;
+            xNorm2.Y2 = graphicHeight - ValueToY(norm - devb);
+            xNorm2.VerticalAlignment = VerticalAlignment.Top;
+            xNorm2.Margin = new Thickness(0, topMargin, 0, 0);
+            grid.Children.Add(xNorm2);
+
+            Label normLabel2 = new Label();
+            normLabel2.HorizontalAlignment = HorizontalAlignment.Right;
+            normLabel2.VerticalAlignment = VerticalAlignment.Top;
+            normLabel2.Margin = new Thickness(0, graphicHeight - ValueToY(norm - devb), scaleWidth, 0);
+            normLabel2.Content = (norm - devb).ToString();
+            normLabel2.FontSize = 12;
+            grid.Children.Add(normLabel2);
+
+
+
+            PlotGraph();
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2); // время обновления
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void ColorForScaleForDevGraphic(double value)
+        {
+            if (value >= normValue - devb && value <= normValue + devt)
+                scale.Fill = Brushes.LightGreen;
+            else
+                scale.Fill = Brushes.Coral;
+        }
+
+        private void CreateGraphicAndScale(string graphicNameString)
+        {
+            Label graphicName = new Label();
+            graphicName.HorizontalAlignment = HorizontalAlignment.Center;
+            graphicName.VerticalAlignment = VerticalAlignment.Bottom;
+            //graphicName.Margin = new Thickness(0, 0, 0, 0);
+            graphicName.Content = graphicNameString;
+            grid.Children.Add(graphicName);
+
             scale.Width = scaleWidth;
             scale.Height = 0;
             scale.Fill = new SolidColorBrush(Colors.LightGreen);
             scale.HorizontalAlignment = HorizontalAlignment.Left;
             scale.VerticalAlignment = VerticalAlignment.Bottom;
-            scale.Margin = new Thickness(graphicWidth + graphicToScale, 0, 0, grid.Height - graphicHeight);
+            scale.Margin = new Thickness(graphicWidth + graphicToScale, 0, 0, grid.Height - graphicHeight - topMargin);
             grid.Children.Add(scale);
-
-    
 
             Rectangle r = new Rectangle();
             r.Width = scaleWidth;
@@ -64,142 +255,45 @@ namespace Monitor.pages
             r.Stroke = new SolidColorBrush(Colors.Black);
             r.HorizontalAlignment = HorizontalAlignment.Left;
             r.VerticalAlignment = VerticalAlignment.Top;
-            r.Margin = new Thickness(graphicWidth + graphicToScale, 0, 0, 0);
+            r.Margin = new Thickness(graphicWidth + graphicToScale, topMargin, 0, 0);
             grid.Children.Add(r);
 
-            //Line yAxis = new Line();
-            //yAxis.Stroke = Brushes.Black;
-            //yAxis.StrokeThickness = 1.5;
-            //yAxis.X1 = 0;
-            //yAxis.Y1 = 0;
-            //yAxis.X2 = 0;
-            //yAxis.Y2 = canvas.Height;
-            //canvas.Children.Add(yAxis);
-
-            //Line yAxis = new Line();
-            //yAxis.Stroke = Brushes.Black;
-            //yAxis.StrokeThickness = 1.5;
-            //yAxis.X1 = 0;
-            //yAxis.Y1 = 0;
-            //yAxis.X2 = 0;
-            //yAxis.Y2 = canvas.Height;
-            //canvas.Children.Add(yAxis);
-
-            valueOfParameter.Name = "valueOfParameter";
-            valueOfParameter.HorizontalAlignment = HorizontalAlignment.Left;
-            valueOfParameter.VerticalAlignment = VerticalAlignment.Top;
-            valueOfParameter.Margin = new Thickness(graphicWidth + graphicToScale + scaleWidth, 0, 0, 0);
-            grid.Children.Add(valueOfParameter);
-
-            //points.Add(new Point(0, 100));
-            //points.Add(new Point(betweenPoints, 100));
-            //points.Add(new Point(betweenPoints * 2, 150));
-            //points.Add(new Point(betweenPoints * 3, 100));
-            //points.Add(new Point(betweenPoints * 4, 80));
-            //points.Add(new Point(betweenPoints * 5, 120));
-            //points.Add(new Point(betweenPoints * 6, 63));
-            //points.Add(new Point(betweenPoints * 7, 89));
-            //points.Add(new Point(betweenPoints * 8, 150));
-            //points.Add(new Point(betweenPoints * 9, 200));
-
-            //valueOfParameter.Content = points[points.Count - 1].Y.ToString();
-
-            PlotGraph(points);
-            //ColorForScale(points[points.Count - 1].Y, 200, 20);
-            //AnimationForScale(points[points.Count-1].Y);
-
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.4); // Обновление каждую секунду
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private double GetRandomSpeed()
-        {
-            // Генерируем случайное значение скорости для демонстрации (правило нормального распределения)
-            Random random = new Random();
-
-            double u1 = 1 - random.NextDouble(); // Генерируем случайное число в диапазоне (0, 1] (исключая 0)
-            double u2 = 1 - random.NextDouble(); // Генерируем еще одно случайное число в диапазоне (0, 1] (исключая 0)
-
-            double z1 = Math.Sqrt(-2 * Math.Log(u1)) * Math.Cos(2 * Math.PI * u2);
-            double x = 200 + 50 * z1;
-
-            if (x > 300.0)
-                x = 300;
-
-            return Math.Round(x);
-        }
-
-        //#region стрелка
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            Random rn = new Random();
-
-            if (points.Count == countOfPoints)
+            if (minAllowableValue < 0)
             {
-                points.RemoveAt(0);
-                for (int i = 0; i < points.Count; i++)
-                    points[i] = new Point(betweenPoints * i, points[i].Y);
-                points.Add(new Point(betweenPoints * points.Count, GetRandomSpeed()*graphicHeight/300));
-            }
-            else
-            {
-                points.Add(new Point(betweenPoints * points.Count, GetRandomSpeed() * graphicHeight / 300));
+                Line xZero = new Line();
+                xZero.Stroke = Brushes.Blue;
+                xZero.StrokeThickness = 1;
+                xZero.X1 = 0;
+                xZero.Y1 = graphicHeight - (0 - minAllowableValue * (graphicHeight / (maxAllowableValue - minAllowableValue)));
+                xZero.X2 = grid.Width;
+                xZero.Y2 = graphicHeight - (0 - minAllowableValue * (graphicHeight / (maxAllowableValue - minAllowableValue)));
+                xZero.VerticalAlignment = VerticalAlignment.Top;
+                xZero.Margin = new Thickness(0, topMargin, 0, 0);
+                grid.Children.Add(xZero);
+
+                Label zeroLabel = new Label();
+                zeroLabel.HorizontalAlignment = HorizontalAlignment.Right;
+                zeroLabel.VerticalAlignment = VerticalAlignment.Top;
+                zeroLabel.Margin = new Thickness(0, graphicHeight - (0 - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue), scaleWidth, 0);
+                zeroLabel.Content = "0";
+                zeroLabel.FontSize = 12;
+                grid.Children.Add(zeroLabel);
             }
 
-            PlotGraph(points);
-            ColorForScale(points[points.Count - 1].Y, 200, 20);
-            AnimationForScale(points[points.Count - 1].Y);
-            valueOfParameter.Content = points[points.Count - 1].Y.ToString();
-        }
-
-        //private double GetRandomSpeed()
-        //{
-        //    // Генерируем случайное значение скорости для демонстрации
-        //    Random random = new Random();
-        //    return random.Next(0, 201);
-        //}
-
-        //private double MapValue(double value, double fromMin, double fromMax, double toMin, double toMax)
-        //{
-        //    // Преобразуем значение из одного диапазона в другой
-        //    return (value - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
-        //}
-        //#endregion
-
-        private void PlotGraph(List<Point> points)
-        {
-            // Создаем канвас
             Canvas canvas = new Canvas();
             canvas.Width = graphicWidth;
             canvas.Height = graphicHeight;
-            canvas.Background = Brushes.White;
+            canvas.HorizontalAlignment = HorizontalAlignment.Left;
+            canvas.VerticalAlignment = VerticalAlignment.Top;
+            canvas.Margin = new Thickness(0, topMargin, 0, 0);
+            canvas.Name = "myCanvas";
+            grid.Children.Add(canvas);
 
+            valueOfParameter.HorizontalAlignment = HorizontalAlignment.Center;
+            valueOfParameter.VerticalAlignment = VerticalAlignment.Top;
+            valueOfParameter.Foreground = Brushes.Black;
+            grid.Children.Add(valueOfParameter);
 
-            for (int i = 0; i < points.Count - 1; i++)
-            {
-                Line line = new Line();
-                //if (points[points.Count - 1].Y <= 200 + 20 && points[points.Count - 1].Y >= 200 - 20)
-                //{
-                //    line.Stroke = Brushes.LightGreen;
-                //}
-                //else
-                //{
-                //    line.Stroke = Brushes.Red;
-                //}
-                line.Stroke = Brushes.Blue;
-                line.StrokeThickness = 1.7;
-
-                line.X1 = points[i].X;
-                line.Y1 = canvas.Height - points[i].Y;
-                line.X2 = points[i + 1].X;
-                line.Y2 = canvas.Height - points[i + 1].Y;
-
-                canvas.Children.Add(line);
-            }
-
-            // Добавляем оси
             Line xAxis = new Line();
             xAxis.Stroke = Brushes.Black;
             xAxis.StrokeThickness = 1.5;
@@ -207,7 +301,9 @@ namespace Monitor.pages
             xAxis.Y1 = canvas.Height;
             xAxis.X2 = canvas.Width;
             xAxis.Y2 = canvas.Height;
-            canvas.Children.Add(xAxis);
+            xAxis.VerticalAlignment = VerticalAlignment.Top;
+            xAxis.Margin = new Thickness(0, topMargin, 0, 0);
+            grid.Children.Add(xAxis);
 
             Line yAxis = new Line();
             yAxis.Stroke = Brushes.Black;
@@ -216,53 +312,66 @@ namespace Monitor.pages
             yAxis.Y1 = 0;
             yAxis.X2 = 0;
             yAxis.Y2 = canvas.Height;
-            canvas.Children.Add(yAxis);
-
-            canvas.HorizontalAlignment = HorizontalAlignment.Left;
-            canvas.VerticalAlignment = VerticalAlignment.Top;
-            grid.Children.Add(canvas);
+            yAxis.VerticalAlignment = VerticalAlignment.Top;
+            yAxis.Margin = new Thickness(0, topMargin, 0, 0);
+            grid.Children.Add(yAxis);
         }
 
+        private double GetRandomSpeed()
+        {
+            Random random = new Random();
+            return random.Next((int)minAllowableValue, (int)maxAllowableValue)+0.01;
+        }
 
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             Random rn = new Random();
 
             if (points.Count == countOfPoints)
             {
                 points.RemoveAt(0);
-                for (int i = 0; i < points.Count; i++)
-                    points[i] = new Point(betweenPoints * i, points[i].Y);
-                points.Add(new Point(betweenPoints * points.Count, rn.Next(0, graphicHeight)));
-            }
-            else
-            {
-                points.Add(new Point(betweenPoints * points.Count, rn.Next(0, graphicHeight)));
             }
 
-            PlotGraph(points);
-            ColorForScale(points[points.Count - 1].Y, 200, 20);
-            AnimationForScale(points[points.Count - 1].Y);
-            valueOfParameter.Content = points[points.Count - 1].Y.ToString();
+            points.Add(GetRandomSpeed());
+
+            PlotGraph();
+            AnimationForScale(ValueToY(points[points.Count - 1]));
+            valueOfParameter.Content = Math.Round(points[points.Count - 1], 2);
         }
 
-        private void ColorForScale(double value, double normal, double deviation)
+        private double ValueToY(double n)
         {
-            if (value <= normal + deviation && value >= normal - deviation)
+            return (n - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue);
+        }
+
+        private void PlotGraph()
+        {
+            Grid myGrid = (Grid)FindName("grid");
+            Canvas canvas = grid.Children.OfType<Canvas>().FirstOrDefault(c => c.Name == "myCanvas");
+            canvas.Children.Clear();
+
+            for (int i = 0; i < points.Count - 1; i++)
             {
-                scale.Fill = new SolidColorBrush(Colors.LightGreen);
-            }
-            else
-            {
-                scale.Fill = new SolidColorBrush(Colors.Red);
+                Line line = new Line();
+                line.Stroke = Brushes.Black;
+                line.StrokeThickness = 1.7;
+
+                line.X1 = betweenPoints * i;
+                line.Y1 = canvas.Height - ValueToY(points[i]);
+                line.X2 = betweenPoints * (i + 1);
+                line.Y2 = canvas.Height - ValueToY(points[i+1]);
+
+                canvas.Children.Add(line);
             }
         }
 
         private void AnimationForScale(double n)
         {
             DoubleAnimation anim = new DoubleAnimation();
+            if(devb == double.NaN)
+                ColorForScaleForSimpleGraphic(points[points.Count - 1]);
+            else
+                ColorForScaleForDevGraphic(points[points.Count - 1]);
             anim.From = scale.Height;
             anim.To = n;
             anim.Duration = TimeSpan.FromSeconds(1);

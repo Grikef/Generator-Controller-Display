@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Monitor.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="270" d:DesignWidth="360"
+      d:DesignHeight="220" d:DesignWidth="250"
       Title="PageWithGraphic">
     <Border BorderBrush="Black" BorderThickness="1">
-        <Grid x:Name="grid" Margin="5" Height="220" Width="320" Background="White">
+        <Grid x:Name="grid"  Height="220" Width="250" Background="White">
         
         </Grid>
     </Border>

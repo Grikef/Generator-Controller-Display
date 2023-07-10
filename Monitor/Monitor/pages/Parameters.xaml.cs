@@ -46,11 +46,19 @@ namespace Monitor.pages
         {
             InitializeComponent();
 
-            graphic1.Content = new PageWithGraphic();
-            graphic2.Content = new PageWithGraphic();
-            graphic3.Content = new PageWithGraphic();
-            graphic4.Content = new PageWithGraphic();
-            graphic5.Content = new PageWithGraphic();
+            graphic1.Content = new PageWithGraphic("Скорость двигателя",6, 10, 8, true);
+            graphic2.Content = new PageWithGraphic("Давление масла", -100, 200, 150, true);
+            graphic3.Content = new PageWithGraphic("Давление масла", 100, 200, 150, false);
+            graphic4.Content = new PageWithGraphic("Давление масла", 100, 200, 150,false);
+            graphic5.Content = new PageWithGraphic("Давление масла", -10, 200, 150, true);
+            graphic6.Content = new PageWithGraphic("Давление масла", -170, 200, 150, true);
+            graphic7.Content = new PageWithGraphic("Давление масла", 100, 200, 150, true);
+            graphic8.Content = new PageWithGraphic("Давление масла", -50, 200, 150, 50, 30);
+            //graphic3.Content = new PageWithGraphic("Температура двигателя");
+            //graphic4.Content = new PageWithGraphic("Температура масла");
+            //graphic5.Content = new PageWithGraphic("Температура кожуха");
+            //graphic6.Content = new PageWithGraphic("Напряжение батареи");
+            //graphic7.Content = new PageWithGraphic("Зарядное напряжение");
         }
 
         //        //создание шкалы и значение параметра

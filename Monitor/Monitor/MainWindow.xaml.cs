@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,12 @@ namespace Monitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ProtocolHandler protocol;
+
         public MainWindow()
         {
-            InitializeComponent();
+            
         }
+        
     }
 }

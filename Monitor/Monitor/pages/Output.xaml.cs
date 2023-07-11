@@ -33,17 +33,17 @@ namespace Monitor.pages
             if (btn == null)
                 return;
 
-            TextBlock? textBlock = btn.Content as TextBlock;
+            //TextBlock? textBlock = btn.Content as TextBlock;
 
-            if(textBlock!.Text == "OFF")
+            if(btn.Content.ToString() == "OFF")
             {
                 btn.Background = Brushes.LightGreen;
-                btn.Content = new string("ON");
+                btn.Content = "ON";
             }
-            else if(textBlock!.Text == "ON")
+            else if(btn.Content.ToString() == "ON")
             {
                 btn.Background = Brushes.Red;
-                btn.Content = new string("OFF");
+                btn.Content = "OFF";
             }
             else
             {

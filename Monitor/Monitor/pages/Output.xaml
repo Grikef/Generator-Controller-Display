@@ -60,7 +60,7 @@
 
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Стартер" Style="{StaticResource ColumnValue}"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="Топливо" Style="{StaticResource ColumnValue}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="Предварительный подогрев" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" TextAlignment="Center" Text="Предварительный подогрев" Style="{StaticResource ColumnValue}"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="Функция" Style="{StaticResource ColumnValue}"/>
 
             <TextBlock Grid.Row="1" Grid.Column="2" x:Name="FirstValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
@@ -68,18 +68,14 @@
             <TextBlock Grid.Row="3" Grid.Column="2" x:Name="ThirdValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
             <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FourthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
 
-            <Button Grid.Row="1" Grid.Column="3" x:Uid="1" Click="Button_Click" Height="30" Width="30" Background="Red">
-                <TextBlock x:Name="la" Text="OFF"/>
-            </Button>
-            <Button Grid.Row="2" Grid.Column="3" x:Uid="2" Click="Button_Click" Height="30" Width="30" Background="Red">
-                <TextBlock Text="OFF"/>
-            </Button>
-            <Button Grid.Row="3" Grid.Column="3" x:Uid="3" Click="Button_Click" Height="30" Width="30" Background="Red">
-                <TextBlock Text="OFF"/>
-            </Button>
-            <Button Grid.Row="4" Grid.Column="3" x:Uid="4" Click="Button_Click" Height="30" Width="30" Background="Red">
-                <TextBlock Text="OFF"/>
-            </Button>
+            <Button Grid.Row="1" Grid.Column="3" x:Uid="1" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
+
+            <Button Grid.Row="2" Grid.Column="3" x:Uid="2" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
+
+            <Button Grid.Row="3" Grid.Column="3" x:Uid="3" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
+
+            <Button Grid.Row="4" Grid.Column="3" x:Uid="4" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
+
         </Grid>
     </Border>
 </Page>

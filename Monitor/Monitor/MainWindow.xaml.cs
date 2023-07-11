@@ -38,7 +38,7 @@ namespace Monitor
 
         public void AboutProgram_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this, "Тут должно быть описание программы", "О программе");
+            MessageBox.Show(this, "Эта программа очень интересная, хорошая и полезная. На нее было потрачено много сил и времени. Если у вас есть данные об аналоговых выходах, вы можете доделать нашу замечательную программу. СПАСИБО, ЧТО ПОЛЬЗУЕТЕСЬ НАШЕЙ ПРОДУКЦИЕЙ!!!", "О программе");
         }
 
         public void Exit_Click(object sender, RoutedEventArgs e)
@@ -106,6 +106,19 @@ namespace Monitor
         private void InfoFrame_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        public void TreeViewAnalogIn_Selected(object sender, RoutedEventArgs e)
+        {
+            if (InfoFrame.Content is not pages.Analog)
+            {
+                InfoFrame.Content = new pages.Analog();
+                e.Handled = true;
+            }
+        }
+
+        public void TreeViewAnalogOut_Selected(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

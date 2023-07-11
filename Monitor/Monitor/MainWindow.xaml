@@ -53,8 +53,8 @@
                     <TreeViewItem Header="Выходы" Selected="TreeViewOut_Selected"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Аналоговые">
-                    <TreeViewItem Header="Входы"/>
-                    <TreeViewItem Header="Выходы"/>
+                    <TreeViewItem Header="Входы" Selected="TreeViewAnalogIn_Selected"/>
+                    <TreeViewItem Header="Выходы" Selected="TreeViewAnalogOut_Selected"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Дополнительные"/>
             </TreeView>

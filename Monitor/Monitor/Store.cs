@@ -22,13 +22,13 @@ namespace Monitor
                 }
             }
 
-            public class Voltage
+            public class BatteryVoltage
             {
                 public double normal = 230.0;
                 public double dispersion = 15.0;
             }
 
-            public class Current
+            public class ChargingVoltage
             {
                 public double normal = 27.0;
                 public double dispersion = 2.0;

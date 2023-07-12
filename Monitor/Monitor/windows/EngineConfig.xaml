@@ -8,6 +8,13 @@
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="EngineConfig" Height="700" Width="950">
 
+    <Window.Resources>
+        <Style x:Key="Text">
+            <Setter Property="Control.FontFamily" Value="Verdana"/>
+            <Setter Property="Control.FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -18,12 +25,14 @@
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
 
-                <Frame x:Name="first" Height="120" Width="915"/>
-                <Frame x:Name="second" Height="120" Width="915"/>
-                <Frame x:Name="third" Height="120" Width="915"/>
-                <Frame x:Name="fourth" Height="120" Width="915"/>
-                <Frame x:Name="fifth" Height="120" Width="915"/>
-                <Frame x:Name="sixth" Height="120" Width="915"/>
+                <Frame x:Name="EnginePower" Height="120" Width="915"/>
+                <Frame x:Name="OilPressure" Height="120" Width="915"/>
+                <Frame x:Name="BatteryVoltage" Height="120" Width="915"/>
+                <Frame x:Name="ChargingVoltage" Height="120" Width="915"/>
+                <Frame x:Name="EngineTemperature" Height="120" Width="915"/>
+                <Frame x:Name="OilTemperature" Height="120" Width="915"/>
+                <Frame x:Name="CasingTemperature" Height="120" Width="915"/>
+                <Frame x:Name="Fuel" Height="120" Width="915"/>
                 <!--<GroupBox Header="Сила тока" Padding="5" Style="{StaticResource Text}">
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal">
@@ -178,7 +187,7 @@
 
         <TextBlock Grid.Row="1" Text="*Обязательно для заполнения" Style="{StaticResource Text}" VerticalAlignment="Bottom" Margin="10,0,0,0" Foreground="Firebrick"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource Text}">
             <Button IsDefault="True" x:Name="AcceptBtn" Width="100" Height="40" Margin="0,0,50,0" Background="LightGreen" Content="OK"/>
             <Button IsCancel="True" Width="100" Height="40" Background="Red" Content="Отмена"/>
         </StackPanel>

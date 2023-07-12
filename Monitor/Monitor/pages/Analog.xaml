@@ -1,12 +1,12 @@
-﻿<Page x:Class="Monitor.pages.Output"
+﻿<Page x:Class="Monitor.pages.Analog"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Monitor.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="540" d:DesignWidth="500"
-      Title="Output" Background="White">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Analog" Background="White">
 
     <Page.Resources>
         <Style x:Key="ColumnName">
@@ -27,54 +27,49 @@
             <Setter Property="Control.VerticalAlignment" Value="Center" />
             <Setter Property="Control.HorizontalAlignment" Value="Center" />
             <Setter Property="Control.Margin" Value="5,0,5,0" />
-            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
         </Style>
     </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1">
-        <Grid Margin="10" ShowGridLines="True">
+        <Grid x:Name="InputTable" Margin="10" ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="№ выхода" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="№ входа" Style="{StaticResource ColumnName}"/>
             <Label Grid.Row="0" Grid.Column="1" Content="Имя функции" Style="{StaticResource ColumnName}"/>
-            <Label Grid.Row="0" Grid.Column="2" Content="Статус" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Значение" Style="{StaticResource ColumnName}"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="Значение" Style="{StaticResource ColumnName}"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="1" Style="{StaticResource ColumnValue}"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="2" Style="{StaticResource ColumnValue}"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="3" Style="{StaticResource ColumnValue}"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="4" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="01" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="02" Style="{StaticResource ColumnValue}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="03" Style="{StaticResource ColumnValue}"/>
+           
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Стартер" Style="{StaticResource ColumnValue}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="Топливо" Style="{StaticResource ColumnValue}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" TextAlignment="Center" Text="Предварительный подогрев" Style="{StaticResource ColumnValue}"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="Функция" Style="{StaticResource ColumnValue}"/>
-
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="Цифровой вход" Style="{StaticResource ColumnValue}"/>
+           
             <TextBlock Grid.Row="1" Grid.Column="2" x:Name="FirstValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
             <TextBlock Grid.Row="2" Grid.Column="2" x:Name="SecondValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
             <TextBlock Grid.Row="3" Grid.Column="2" x:Name="ThirdValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
-            <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FourthValue" Text="N/A" Style="{StaticResource ColumnValue}"/>
 
-            <Button Grid.Row="1" Grid.Column="3" x:Uid="1" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
+            <TextBlock Grid.Row="1" Grid.Column="3" x:Name="FirstValue1" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="3" x:Name="SecondValue1" Text="N/A" Style="{StaticResource ColumnValue}"/>
+            <TextBlock Grid.Row="3" Grid.Column="3" x:Name="ThirdValue1" Text="N/A" Style="{StaticResource ColumnValue}"/>
 
-            <Button Grid.Row="2" Grid.Column="3" x:Uid="2" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
 
-            <Button Grid.Row="3" Grid.Column="3" x:Uid="3" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
-
-            <Button Grid.Row="4" Grid.Column="3" x:Uid="4" Content="OFF" Click="Button_Click" Height="30" Width="30" Background="Red"/>
 
         </Grid>
     </Border>

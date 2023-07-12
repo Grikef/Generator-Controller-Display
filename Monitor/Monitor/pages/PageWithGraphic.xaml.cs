@@ -47,58 +47,19 @@ namespace Monitor.pages
         private double devb;
         private double devt;
 
-        //public PageWithGraphic(string graphicNameString, double min, double max, double norm)
-        //{
-        //    InitializeComponent();
+        private short graphicType;
+        //0 - не выше
+        //1 - не ниже
+        //2 - график с отклонением
 
-        //    maxAllowableValue = max;
-        //    minAllowableValue = min;
-        //    normValue = norm;
-
-        //    graphicHeight = grid.Height - bottomMargin - topMargin;
-        //    graphicWidth = grid.Width - graphicToScale - scaleWidth;
-        //    betweenPoints = graphicWidth / countOfPoints;
-
-        //    Line xNorm = new Line();
-        //    xNorm.Stroke = Brushes.DarkGreen;
-        //    xNorm.StrokeThickness = 1;
-        //    xNorm.StrokeDashArray = new DoubleCollection() {2, 2};
-        //    xNorm.X1 = 0;
-        //    xNorm.Y1 = graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue);
-        //    xNorm.X2 = grid.Width;
-        //    xNorm.Y2 = graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue);
-        //    xNorm.VerticalAlignment = VerticalAlignment.Top;
-        //    xNorm.Margin = new Thickness(0, topMargin, 0, 0);
-        //    grid.Children.Add(xNorm);
-
-        //    Label normLabel = new Label();
-        //    normLabel.HorizontalAlignment = HorizontalAlignment.Right;
-        //    normLabel.VerticalAlignment = VerticalAlignment.Top;
-        //    normLabel.Margin = new Thickness(0, graphicHeight - (norm - minAllowableValue) * graphicHeight / (maxAllowableValue - minAllowableValue), scaleWidth, 0);
-        //    normLabel.Content = norm.ToString();
-        //    normLabel.FontSize = 12;
-        //    grid.Children.Add(normLabel);
-
-        //    CreateGraphicAndScale(graphicNameString);
-
-        //    PlotGraph();
-
-        //    timer = new DispatcherTimer();
-        //    timer.Interval = TimeSpan.FromSeconds(2); // время обновления
-        //    timer.Tick += Timer_Tick;
-        //    timer.Start();
-        //}
-
-        //график выше и ниже нормы
-        //0 - не выше, 1 - не ниже
-        public PageWithGraphic(string graphicNameString, double min, double max, double norm, bool f)
+        public PageWithGraphic(string graphicNameString, double min, double max, double norm, short type)
         {
             InitializeComponent();
 
             maxAllowableValue = max;
             minAllowableValue = min;
             normValue = norm;
-            this.f = f;
+            graphicType = type;
 
             graphicHeight = grid.Height - bottomMargin - topMargin;
             graphicWidth = grid.Width - graphicToScale - scaleWidth;
@@ -126,43 +87,50 @@ namespace Monitor.pages
             normLabel.FontSize = 12;
             grid.Children.Add(normLabel);
 
-            
-
             PlotGraph();
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(2); // время обновления
+            timer.Interval = TimeSpan.FromSeconds(1); // время обновления
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
-        private void ColorForScaleForSimpleGraphic(double value)
+        private void ColorForScale(double value)
         {
-            if (f)
+            switch(graphicType)
             {
-                if(value >= normValue)
-                    scale.Fill = Brushes.LightGreen;
-                else
-                    scale.Fill = Brushes.Coral;
-            }
-            else
-            {
-                if (value <= normValue)
-                    scale.Fill = Brushes.LightGreen;
-                else
-                    scale.Fill = Brushes.Coral;
+                case 0:
+                    if (value <= normValue)
+                        scale.Fill = Brushes.LightGreen;
+                    else
+                        scale.Fill = Brushes.Coral;
+                    break;
+                case 1:
+                    if (value >= normValue)
+                        scale.Fill = Brushes.LightGreen;
+                    else
+                        scale.Fill = Brushes.Coral;
+                    break;
+                case 2:
+                    if (value >= normValue - devb && value <= normValue + devt)
+                        scale.Fill = Brushes.LightGreen;
+                    else
+                        scale.Fill = Brushes.Coral;
+                    break;
+
             }
         }
 
         //график с отклонением
 
-        public PageWithGraphic(string graphicNameString, double min, double max, double norm, double devb, double devt)
+        public PageWithGraphic(string graphicNameString, double min, double max, double norm, double devb, double devt, short type)
         {
             InitializeComponent();
 
             maxAllowableValue = max;
             minAllowableValue = min;
             normValue = norm;
+            graphicType = type;
 
             this.devb = devb;
             this.devt = devt;
@@ -224,20 +192,11 @@ namespace Monitor.pages
             timer.Start();
         }
 
-        private void ColorForScaleForDevGraphic(double value)
-        {
-            if (value >= normValue - devb && value <= normValue + devt)
-                scale.Fill = Brushes.LightGreen;
-            else
-                scale.Fill = Brushes.Coral;
-        }
-
         private void CreateGraphicAndScale(string graphicNameString)
         {
             Label graphicName = new Label();
             graphicName.HorizontalAlignment = HorizontalAlignment.Center;
             graphicName.VerticalAlignment = VerticalAlignment.Bottom;
-            //graphicName.Margin = new Thickness(0, 0, 0, 0);
             graphicName.Content = graphicNameString;
             grid.Children.Add(graphicName);
 
@@ -368,10 +327,7 @@ namespace Monitor.pages
         private void AnimationForScale(double n)
         {
             DoubleAnimation anim = new DoubleAnimation();
-            if(devb == double.NaN)
-                ColorForScaleForSimpleGraphic(points[points.Count - 1]);
-            else
-                ColorForScaleForDevGraphic(points[points.Count - 1]);
+            ColorForScale(points[points.Count - 1]);
             anim.From = scale.Height;
             anim.To = n;
             anim.Duration = TimeSpan.FromSeconds(1);

@@ -28,12 +28,15 @@
             </MenuItem>
 
             <MenuItem Header="Конфигурация">
-                <MenuItem Header="Генератор"/>
-                <MenuItem Header="Цифровые">
+                <MenuItem Header="Сеть" IsEnabled="False"/>
+                <MenuItem Header="Генератор" IsEnabled="False"/>
+                <MenuItem Header="Двигатель" Click="EngineConfig_Click"/>
+                <Separator/>
+                <MenuItem Header="Цифровые" IsEnabled="False">
                     <!--<MenuItem Header="Цифровые входы"/>
                     <MenuItem Header="Цифровые выходы"/>-->
                 </MenuItem>
-                <MenuItem Header="Аналоговые">
+                <MenuItem Header="Аналоговые" IsEnabled="False">
                     <!--<MenuItem Header="Аналоговые входы"/>
                     <MenuItem Header="Аналоговые выходы"/>-->
                 </MenuItem>
@@ -47,7 +50,9 @@
             </Grid.ColumnDefinitions>
 
             <TreeView Grid.Column="0" Style="{StaticResource Light}">
-                <TreeViewItem x:Name="defaultTVItem" Header="Генератор" Selected="TreeViewMain_Selected"/>
+                <TreeViewItem Header="Сеть"/>
+                <TreeViewItem Header="Генератор"/>
+                <TreeViewItem x:Name="defaultTVItem" Header="Двигатель" Selected="TreeViewMain_Selected"/>
                 <TreeViewItem Header="Цифровые" Selected="TreeViewInOut_Selected">
                     <TreeViewItem Header="Входы" Selected="TreeViewIn_Selected"/>
                     <TreeViewItem Header="Выходы" Selected="TreeViewOut_Selected"/>

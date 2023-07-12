@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Monitor.pages;
+using Monitor.windows;
 
 namespace Monitor
 {
@@ -44,6 +45,18 @@ namespace Monitor
         public void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void EngineConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new EngineConfig();
+            window.Owner = this;
+
+            if (window.ShowDialog() == true)
+            {
+
+            }
+
         }
 
         public void TreeViewMain_Selected(object sender, RoutedEventArgs e)

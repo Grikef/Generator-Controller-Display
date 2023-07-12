@@ -8,14 +8,6 @@
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="EngineConfig" Height="700" Width="950">
 
-    <Window.Resources>
-        <Style x:Key="Text">
-            <Setter Property="Control.FontFamily" Value="Verdana"/>
-            <Setter Property="Control.FontSize" Value="15"/>
-            <Setter Property="Control.Margin" Value="0,10,0,0"/>
-        </Style>
-    </Window.Resources>
-    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -25,37 +17,14 @@
 
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
-                <GroupBox Header="Напряжение" Padding="5" Style="{StaticResource Text}">
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
-                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton x:Name="Voltage_Normal_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
-                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
-                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
-                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton x:Name="Voltage_UpLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
-                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton x:Name="Voltage_DownLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
-                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
-                            <TextBox x:Name="Voltage_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
-                        </StackPanel>
-                    </WrapPanel>
-                </GroupBox>
 
-                <GroupBox Header="Сила тока" Padding="5" Style="{StaticResource Text}">
+                <Frame x:Name="first" Height="120" Width="915"/>
+                <Frame x:Name="second" Height="120" Width="915"/>
+                <Frame x:Name="third" Height="120" Width="915"/>
+                <Frame x:Name="fourth" Height="120" Width="915"/>
+                <Frame x:Name="fifth" Height="120" Width="915"/>
+                <Frame x:Name="sixth" Height="120" Width="915"/>
+                <!--<GroupBox Header="Сила тока" Padding="5" Style="{StaticResource Text}">
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
@@ -203,7 +172,7 @@
                             <TextBox x:Name="Fuel_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
                         </StackPanel>
                     </WrapPanel>
-                </GroupBox>
+                </GroupBox>-->
             </StackPanel>
         </ScrollViewer>
 

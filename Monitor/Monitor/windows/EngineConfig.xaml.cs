@@ -40,44 +40,8 @@ namespace Monitor.windows
         {
             InitializeComponent();
 
-            TextBox[] voltage = { Voltage_Max, Voltage_Min, Voltage_Norm, Voltage_UpDispersion,
-                Voltage_DownDispersion, Voltage_UpLimit, Voltage_DownLimit };
-            foreach (var item in voltage)
-                item.TextChanged += IsDouble;
-
-            TextBox[] current = { Current_Max, Current_Min, Current_Norm, Current_UpDispersion,
-                Current_DownDispersion, Current_UpLimit, Current_DownLimit };
-            foreach (var item in current)
-                item.TextChanged += IsDouble;
-
-            TextBox[] oilPress = { OilPress_Max, OilPress_Min, OilPress_Norm, OilPress_UpDispersion,
-                OilPress_DownDispersion, OilPress_UpLimit, OilPress_DownLimit };
-            foreach (var item in oilPress)
-                item.TextChanged += IsDouble;
-
-            TextBox[] engineTemp = { EngineTemp_Max, EngineTemp_Min, EngineTemp_Norm, EngineTemp_UpDispersion,
-                EngineTemp_DownDispersion, EngineTemp_UpLimit, EngineTemp_DownLimit };
-            foreach (var item in engineTemp)
-                item.TextChanged += IsDouble;
-
-            TextBox[] oilTemp = { OilTemp_Max, OilTemp_Min, OilTemp_Norm, OilTemp_UpDispersion,
-                OilTemp_DownDispersion, OilTemp_UpLimit, OilTemp_DownLimit };
-            foreach (var item in oilTemp)
-                item.TextChanged += IsDouble;
-
-            TextBox[] fuel = { Fuel_Max, Fuel_Min, Fuel_Norm, Fuel_UpDispersion,
-                Fuel_DownDispersion, Fuel_UpLimit, Fuel_DownLimit };
-            foreach (var item in fuel)
-                item.TextChanged += IsDouble;
-
-            RadioButton[] radioButtons = { Voltage_Normal_Radio, Current_Normal_Radio, OilPress_Normal_Radio,
-                EngineTemp_Normal_Radio, OilTemp_Normal_Radio, Fuel_Normal_Radio};
-            foreach(var item in radioButtons)
-            {
-                item.IsChecked = true;
-            }
-
             //TODO Load values from Store
+
         }
 
         private void IsDouble(object sender, RoutedEventArgs e)

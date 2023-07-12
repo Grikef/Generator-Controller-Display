@@ -1,0 +1,52 @@
+﻿<Page x:Class="Monitor.pages.EnginConfigFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Monitor.pages"
+      mc:Ignorable="d" Background="White"
+      d:DesignHeight="120" d:DesignWidth="910"
+      Title="EnginConfigFrame">
+
+    <Page.Resources>
+        <Style x:Key="Text">
+            <Setter Property="Control.FontFamily" Value="Verdana"/>
+            <Setter Property="Control.FontSize" Value="15"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <GroupBox x:Name="groupBox" Header="Header" Padding="5" Style="{StaticResource Text}">
+            <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                    <TextBox x:Name="Max_TBox" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                    <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                    <TextBox x:Name="Min_TBox" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="Normal_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                    <TextBox x:Name="Normat_TBox" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                    <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                    <TextBox x:Name="UpDispersion_TBox" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                    <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                    <TextBox x:Name="DownDispersion_TBox" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="UpLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                    <TextBox x:Name="UpLimit_TBox" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="DownLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                    <TextBox x:Name="DownLimit_TBox" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                </StackPanel>
+            </WrapPanel>
+        </GroupBox>
+    </Grid>
+</Page>

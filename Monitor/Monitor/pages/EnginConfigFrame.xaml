@@ -26,9 +26,9 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="Normal_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <RadioButton x:Name="Normal_Radio" Margin="10,0,0,0" Checked="RadioGroup_Checked"/>
                     <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
-                    <TextBox x:Name="Normat_TBox" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                    <TextBox x:Name="Normal_TBox" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
                     <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
                     <TextBox x:Name="UpDispersion_TBox" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
                     <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
@@ -36,13 +36,13 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="UpLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <RadioButton x:Name="UpLimit_Radio" Margin="10,0,0,0" Checked="RadioGroup_Checked"/>
                     <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
                     <TextBox x:Name="UpLimit_TBox" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="DownLimit_Radio" Margin="10,0,0,0" GroupName="VoltageGroup" Checked="VoltageRadioGroup_Checked"/>
+                    <RadioButton x:Name="DownLimit_Radio" Margin="10,0,0,0" Checked="RadioGroup_Checked"/>
                     <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
                     <TextBox x:Name="DownLimit_TBox" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
                 </StackPanel>

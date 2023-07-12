@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Monitor
 {
     public partial class MainWindow
     {
-        public static byte ChannelOpenMode = 2; // 11/29 bit
-
-
-        /*public void Start()
+        public byte ChannelOpenMode = 2; // 11/29 bit
+        
+        private void Message(canmsg_t cadre)
         {
-            protocol = new ProtocolHandler();
-            InitializeComponent();
-            protocol.Initialize();
-            
-            protocol.Open(0, OpenMode());
-        }*/
+            if (cadre.id != 0)
+              MessageBox.Show("YES YES YES");
+        }
         private byte OpenMode()
         {
             
@@ -24,8 +21,9 @@ namespace Monitor
             {
                 0 => Variables.CIO_CAN11,
                 1 => Variables.CIO_CAN29,
-                _ => Variables.CIO_CAN11 | Variables.CIO_CAN29
+                _ => (Variables.CIO_CAN11 | Variables.CIO_CAN29)
             };
+            
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MatadorInitialSetup.CAN;
 
 namespace Monitor
 {
@@ -21,11 +22,17 @@ namespace Monitor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProtocolHandler protocol;
-
+        
         public MainWindow()
         {
-            
+            InitializeComponent();
+            CanBus canBus = new CanBus();
+            canBus.Open();
+            Thread.Sleep(500);
+            while (true)
+            {
+                CanMsg canMsg = canBus.GetCanMsg();
+            }
         }
         
     }

@@ -1,0 +1,186 @@
+﻿<Window x:Class="Monitor.windows.EngineConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:Monitor.windows"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="EngineConfig" Height="700" Width="950">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+
+                <Frame x:Name="first" Height="120" Width="915"/>
+                <Frame x:Name="second" Height="120" Width="915"/>
+                <Frame x:Name="third" Height="120" Width="915"/>
+                <Frame x:Name="fourth" Height="120" Width="915"/>
+                <Frame x:Name="fifth" Height="120" Width="915"/>
+                <Frame x:Name="sixth" Height="120" Width="915"/>
+                <!--<GroupBox Header="Сила тока" Padding="5" Style="{StaticResource Text}">
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Current_Normal_Radio" Margin="10,0,0,0" GroupName="CurrentGroup"/>
+                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Current_UpLimit_Radio" Margin="10,0,0,0" GroupName="CurrentGroup"/>
+                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Current_DownLimit_Radio" Margin="10,0,0,0" GroupName="CurrentGroup"/>
+                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Current_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="Давление масла" Padding="5" Style="{StaticResource Text}">
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilPress_Normal_Radio" Margin="10,0,0,0" GroupName="OilPressGroup"/>
+                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilPress_UpLimit_Radio" Margin="10,0,0,0" GroupName="OilPressGroup"/>
+                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilPress_DownLimit_Radio" Margin="10,0,0,0" GroupName="OilPressGroup"/>
+                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilPress_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="Температура двигателя" Padding="5" Style="{StaticResource Text}">
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="EngineTemp_Normal_Radio" Margin="10,0,0,0" GroupName="EngineTempGroup"/>
+                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="EngineTemp_UpLimit_Radio" Margin="10,0,0,0" GroupName="EngineTempGroup"/>
+                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="EngineTemp_DownLimit_Radio" Margin="10,0,0,0" GroupName="EngineTempGroup"/>
+                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="EngineTemp_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="Температура масла" Padding="5" Style="{StaticResource Text}">
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilTemp_Normal_Radio" Margin="10,0,0,0" GroupName="OilTempGroup"/>
+                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilTemp_UpLimit_Radio" Margin="10,0,0,0" GroupName="OilTempGroup"/>
+                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="OilTemp_DownLimit_Radio" Margin="10,0,0,0" GroupName="OilTempGroup"/>
+                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="OilTemp_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="Уровень топлива" Padding="5" Style="{StaticResource Text}">
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Максимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_Max" Text="9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Минимально возможное значение:*" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_Min" Text="-9999.9" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Fuel_Normal_Radio" Margin="10,0,0,0" GroupName="FuelGroup"/>
+                            <TextBlock Text="Нормальное значение:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_Norm" Text="100.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вверх:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_UpDispersion" Text="10.0" Margin="5,0,0,0" MaxLength="7"/>
+                            <TextBlock Text="Отклонение вниз:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_DownDispersion" Text="20.0" Margin="5,0,0,0" MaxLength="7"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Fuel_UpLimit_Radio" Margin="10,0,0,0" GroupName="FuelGroup"/>
+                            <TextBlock Text="Значения не выше:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_UpLimit" Text="150.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="Fuel_DownLimit_Radio" Margin="10,0,0,0" GroupName="FuelGroup"/>
+                            <TextBlock Text="Значения не ниже:" Margin="10,0,0,0"/>
+                            <TextBox x:Name="Fuel_DownLimit" Text="90.0" Margin="5,0,0,0" MaxLength="7" IsEnabled="False"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>-->
+            </StackPanel>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="1" Text="*Обязательно для заполнения" Style="{StaticResource Text}" VerticalAlignment="Bottom" Margin="10,0,0,0" Foreground="Firebrick"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button IsDefault="True" x:Name="AcceptBtn" Width="100" Height="40" Margin="0,0,50,0" Background="LightGreen" Content="OK"/>
+            <Button IsCancel="True" Width="100" Height="40" Background="Red" Content="Отмена"/>
+        </StackPanel>
+    </Grid>
+</Window>

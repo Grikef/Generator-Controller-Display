@@ -1,4 +1,4 @@
-﻿namespace MatadorInitialSetup.CAN
+﻿namespace Monitor
 {
     public class CanMsg
     {

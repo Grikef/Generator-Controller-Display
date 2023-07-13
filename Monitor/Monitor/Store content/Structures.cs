@@ -131,23 +131,4 @@ namespace Monitor
         { }
     }
     
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CanBoard
-    {
-        public byte brdnum;
-        
-        public int hwver;
-        
-        public short[] chip = new short[4];
-
-        public char[] name = new char[64];
-
-        public char[] manufact = new char[64];
-
-        public CanBoard()
-        {
-            brdnum = 0;
-            hwver = 0;
-        }
-    }
 }

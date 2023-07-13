@@ -175,5 +175,14 @@ public record Variables
     {
        return ((ver) >> 16) & 0xff;
     }
-
+    // // // // // // // // // // // //
+    public static byte OpenMode(Store.Net net)
+    {
+        return net.openedMode switch
+        {
+            0 => CIO_CAN11,
+            1 => CIO_CAN29,
+            _ => CIO_CAN11 | CIO_CAN29
+        };
+    }
 };

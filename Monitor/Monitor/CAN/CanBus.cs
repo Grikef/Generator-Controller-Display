@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace MatadorInitialSetup.CAN
+namespace Monitor
 {
     public class CanBus
     {
@@ -13,7 +13,7 @@ namespace MatadorInitialSetup.CAN
             binfo.brdnum = 0;
         }
 
-        public short Open()
+        public short Open(Store.Net store)
         {
             status = -100;
             do
@@ -25,7 +25,7 @@ namespace MatadorInitialSetup.CAN
                 if (status < 0) break;
 
                 _canChannel = Convert.ToByte(binfo.chip[0]);
-                status = CiOpen(_canChannel, 0x06);
+                status = CiOpen(_canChannel, Variables.OpenMode(store));
                 if (status < 0) break;
 
                 //status = CiSetBaud(_canChannel, 0x00, 0x14); // 1Mbs

@@ -133,5 +133,14 @@ namespace Monitor
         public void TreeViewAnalogOut_Selected(object sender, RoutedEventArgs e)
         {
         }
+
+        private void TreeViewGenerator_Selected(object sender, RoutedEventArgs e)
+        {
+            if (InfoFrame.Content is not pages.Generator)
+            {
+                InfoFrame.Content = new pages.Generator();
+                e.Handled = true;
+            }
+        }
     }
 }

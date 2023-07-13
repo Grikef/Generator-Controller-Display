@@ -56,8 +56,8 @@ namespace Monitor.pages
                 item.PreviewTextInput += IsAllow;
 
             ////
-            //Max_TBox.TextChanged += ;
-            //Min_TBox.TextChanged += ;
+            Max_TBox.TextChanged += MaxMinBox_Checker;
+            Min_TBox.TextChanged += MaxMinBox_Checker;
             Normal_TBox.TextChanged += NormalTBox_Checker;
             UpDispersion_TBox.TextChanged += UpDispersionTBox_Checker;
             DownDispersion_TBox.TextChanged += DownDispersionTBox_Checker;
@@ -65,6 +65,36 @@ namespace Monitor.pages
             DownLimit_TBox.TextChanged += DownLimitTBox_Checker;
 
             Normal_Radio.IsChecked = true;
+        }
+
+        private void MaxMinBox_Checker(object sender, RoutedEventArgs e)
+        {
+            if (!IsDouble(Max_TBox) || !IsDouble(Min_TBox))
+            {
+         
+                return;
+            }
+
+            double min = double.Parse(Min_TBox.Text);
+            double max = double.Parse(Max_TBox.Text);
+
+            if (max <= min)
+            {
+                Max_TBox.Background = Brushes.Red;
+                Min_TBox.Background = Brushes.Red;
+                return;
+            }
+            else
+            {
+                Max_TBox.Background = Brushes.White;
+                Min_TBox.Background = Brushes.White;
+            }
+
+            NormalTBox_Checker(Normal_TBox, new RoutedEventArgs());
+            UpDispersionTBox_Checker(UpDispersion_TBox, new RoutedEventArgs());
+            DownDispersionTBox_Checker(DownDispersion_TBox, new RoutedEventArgs());
+            UpLimitTBox_Checker(UpLimit_TBox, new RoutedEventArgs());
+            DownDispersionTBox_Checker(DownDispersion_TBox, new RoutedEventArgs());
         }
 
         private void NormalTBox_Checker(object sender, RoutedEventArgs e)

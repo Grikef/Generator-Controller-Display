@@ -23,23 +23,21 @@ namespace Monitor.pages
         public tabl3(string l1, string l2, string s1, string s2)
         {
             InitializeComponent();
-
             a(l1, 0, 0);
             a(l2, 0, 1);
-            a(GetRandomSpeed().ToString() +" " + s1, 1, 0);
-            a(GetRandomSpeed().ToString() + " " + s2, 1, 1);
-
+            a(GetRandom().ToString() + "," + GetRandomDouble().ToString() + " " + s1, 1, 0);
+            a(GetRandom().ToString() + "," + GetRandomDouble().ToString() + " " + s2, 1, 1);
         }
-
-        private int GetRandomSpeed()
+        private int GetRandom()
         {
             Random random = new Random();
-
-            return random.Next(0, 300);
+            return random.Next(0, 1000);
         }
-
-
-
+        private int GetRandomDouble()
+        {
+            Random random = new Random();
+            return random.Next(0, 100);
+        } 
         private void a(string text, int row, int column)
         {
             Label label1 = new Label();

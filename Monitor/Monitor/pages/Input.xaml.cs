@@ -24,25 +24,20 @@ namespace Monitor.pages
         public Input()
         {
             InitializeComponent();
-
             SetAllInputs(2, 2, 2, 2, 2, 2, 2, 2);
         }
-
         public string GetStatusPerCode(int indexOfTable)
         {
             if (inputs[indexOfTable] == 0)
             {
                 return "0";
             }
-
             if (inputs[indexOfTable] == 1)
             {
                 return "1";
             }
-
             return "N/A";
         }
-
         public void SetAllInputs(short first, short second, short third, short fourth,
                                 short fifth, short sixth, short seventh, short eighth)
         {

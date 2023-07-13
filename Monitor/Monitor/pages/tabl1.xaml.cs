@@ -28,20 +28,20 @@ namespace Monitor.pages
             a(l2, 0, 1);
             a(l3, 0, 2);
             
-            a(GetRandomSpeed().ToString()+" "+s, 1, 0);
-            a(GetRandomSpeed().ToString() + " " + s, 1, 1);
-            a(GetRandomSpeed().ToString() + " " + s, 1, 2);
+            a(GetRandom().ToString()+","+ GetRandomDouble().ToString() +" "+s, 1, 0);
+            a(GetRandom().ToString() + "," + GetRandomDouble().ToString() + " " + s , 1, 1);
+            a(GetRandom().ToString() + "," + GetRandomDouble().ToString() + " " + s, 1, 2);
         }
-        private int GetRandomSpeed()
+        private int GetRandom()
         {
-            // Генерируем случайное значение скорости для демонстрации (правило нормального распределения)
             Random random = new Random();
-
-            return random.Next(0,300);
+            return random.Next(0,1000);
         }
-
-
-
+        private int GetRandomDouble()
+        {
+            Random random = new Random();
+            return random.Next(0, 100);
+        }
         private void a(string text, int row, int column)
         {
             Label label1 = new Label();
@@ -54,7 +54,6 @@ namespace Monitor.pages
             Grid.SetColumn(label1, column);
             grid.Children.Add(label1);
         }
-
     }
 }
 

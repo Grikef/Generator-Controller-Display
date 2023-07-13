@@ -20,8 +20,6 @@ namespace Monitor.pages
     /// </summary>
     public partial class Generator: Page
     {
-       
-
         public Generator()
         {
             InitializeComponent();
@@ -35,12 +33,6 @@ namespace Monitor.pages
             page12.Content = new tabl2("L1", "L2", "L3", "Всего", "kVAr", "kVAr", "kVAr", "kVAr");
             page13.Content = new tabl2("L1", "L2", "L3", "Всего", "kVA", "kVA", "kVA", "kVA");
             page14.Content = new tabl2("L1", "L2", "L3", "Всего"," ", " ", " ", " ");
-
-
         }
-
-
-
-
     }
 }
